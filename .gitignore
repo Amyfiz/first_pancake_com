@@ -41,3 +41,38 @@
 .env
 .idea
 .parcel-cache
+
+# Flutter general
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# iOS:
+Podfile.lock
+.symlinks/
+Pods/
+Runner.xcworkspace/
+.ios/Flutter/
+.ios/Flutter/flutter_export_environment.sh
+.ios/Flutter/AppFrameworkInfo.plist
+.ios/Flutter/Flutter.podspec
+
+# Android:
+build/
+.gradle/
+.idea/
+.android/Flutter/
+.android/Flutter/flutter_export_environment.sh
+.android/Flutter/app.properties
+
+# Rails
+/config/database.yml
+/db/*.sqlite3
+/log/*.log
+#/tmp/
+/vendor/
+
+# System
+.env
+.env.local
+config/application.yml
