@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_07_152853) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_26_134636) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,6 +18,15 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_07_152853) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "favourites", id: false, force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "receipt_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["receipt_id"], name: "index_favourites_on_receipt_id"
+    t.index ["user_id"], name: "index_favourites_on_user_id"
   end
 
   create_table "level", force: :cascade do |t|
@@ -32,14 +41,29 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_07_152853) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_receipts_on_category_id"
     t.index ["user_id"], name: "index_receipts_on_user_id"
   end
 
+  create_table "subscriptions", id: false, force: :cascade do |t|
+    t.bigint "follower_id"
+    t.bigint "follow_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["follow_id"], name: "index_subscriptions_on_follow_id"
+    t.index ["follower_id"], name: "index_subscriptions_on_follower_id"
+  end
+
   create_table "users", force: :cascade do |t|
+    t.string "username", null: false
     t.string "email", null: false
-    t.string "name", null: false
+    t.string "password", null: false
+    t.integer "access_level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "subscriptions", "users", column: "follow_id"
+  add_foreign_key "subscriptions", "users", column: "follower_id"
 end
