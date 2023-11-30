@@ -17,6 +17,4 @@ test:
 
 production:
   <<: *default
-  database: first_pancake_com_production
-  username: first_pancake_com
-  password: <%= ENV["FIRST_PANCAKE_COM_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
