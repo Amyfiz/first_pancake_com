@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   get "/", to: "application#index"
 
   post "/registration", to: "registration#create"
+  get "/login", to: "login#create"
 end
