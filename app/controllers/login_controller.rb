@@ -1,14 +1,28 @@
 class LoginController < ApplicationController
-    def create
+    skip_before_action :authorized, only: [:login]
+
+    def login
         @user = User.find_by(email: params[:email])
         if @user
-            if @user.authenticate(params[:password])
-                render json: { username: @user.username }
+            if @user.authenticate(login_params[:password])
+                @token = encode_token(user_id: @user.id)
+                render json: {
+                    token: @token
+                }, status: :accepted
             else
-                render json: "Authentification failed", status: :unauthorized
+                render json: {message: 'Incorrect password'}, status: :unauthorized
             end
         else
-            render json: "Could not find user", status: :not_found
+            render json: {message: 'User doesn`t exist'}, status: :unauthorized
         end
+    end
+
+    def me
+        render json:current_user, status: :ok
+    end
+
+    private 
+    def login_params 
+        params.permit(:email,:password)
     end
 end
