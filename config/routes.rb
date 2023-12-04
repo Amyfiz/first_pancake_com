@@ -9,5 +9,5 @@ Rails.application.routes.draw do
   root to: proc { [200, {}, ['']] }
 
   post "/registration", to: "registration#create"
-  get "/login", to: "login#login"
+  post "/login", to: "login#login"
 end

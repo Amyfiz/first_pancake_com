@@ -7,13 +7,14 @@ class LoginController < ApplicationController
             if @user.authenticate(login_params[:password])
                 @token = encode_token(user_id: @user.id)
                 render json: {
-                    token: @token
+                    token: @token,
+                    user_id: @user.id,
                 }, status: :accepted
             else
-                render json: {message: 'Incorrect password'}, status: :unauthorized
+                render json: {message: 'Incorrect password'}, status: :forbidden
             end
         else
-            render json: {message: 'User doesn`t exist'}, status: :unauthorized
+            render json: {message: 'User doesn`t exist'}, status: :forbidden
         end
     end
 

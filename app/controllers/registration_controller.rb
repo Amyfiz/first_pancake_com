@@ -5,9 +5,9 @@ class RegistrationController < ApplicationController
         @user = User.new user_params
         if @user.save && @user.valid?
             @token = encode_token(user_id: @user.id)
-            render json: { token: @token }, status: :created
+            render json: { token: @token, user_id: @user.id }, status: :created
          else
-            render json: {message: "User already exists."}, status: :unprocessable_entity
+            render json: {message: "User already exists."}, status: :forbidden
         end
     end
 
