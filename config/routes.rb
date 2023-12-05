@@ -9,5 +9,12 @@ Rails.application.routes.draw do
   root to: proc { [200, {}, ['']] }
 
   post "/registration", to: "registration#create"
+
+  get "/receipts", to: "receipt#index"
+  post "/receipt", to: "receipt#create_receipt"
+  get "/receipts/favourite", to: "receipt#favourites"
+  post "/receipts/favourite/:id", to: "receipt#add_favourite"
+
   post "/login", to: "login#login"
+  get "/user", to: "login#user"
 end
