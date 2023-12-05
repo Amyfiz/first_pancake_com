@@ -21,13 +21,15 @@ class LoginController < ApplicationController
     def user
         @user = current_user
         #@user.subscriptions.create(follow_id: @user.id, follower_id: @user.id) // через это можно создавать в бд записи
-        # @receipt = Receipt.find_by(     id: 1)
-        # @receipt.favourites.create(user_id: @user.id)
+        #@receipt = Receipt.find_by(     id: 1)
+        #@receipt.favourites.create(user_id: @user.id)
         render json: {
-            user: @user,
-            subscribers: @user.subscriptions.count,
-            receipts_count: @user.receipts.count,
-            favoutite_receipts: @user.favourites.count
+          user_id: @user.id,
+          username: @user.username,
+          email: @user.email,
+          subscribers_count: @user.subscriptions.count,
+          receipts_count: @user.receipts.count,
+          favoutite_receipts: @user.favourites.count,
         }, status: :ok
     end
 
