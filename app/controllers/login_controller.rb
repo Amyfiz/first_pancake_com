@@ -26,7 +26,7 @@ class LoginController < ApplicationController
         render json: {
             user: @user,
             subscribers: @user.subscriptions.count,
-            #receipts_count: @user.receipts.count,
+            receipts_count: @user.receipts.count,
             favoutite_receipts: @user.favourites.count
         }, status: :ok
     end
