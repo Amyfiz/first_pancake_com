@@ -14,10 +14,12 @@ Rails.application.routes.draw do
   post "/receipt", to: "receipt#create_receipt"
   get "/receipts/favourite", to: "receipt#favourites"
   post "/receipts/favourite/:id", to: "receipt#add_favourite"
+  get "/receipt/:id", to: "receipt#receipt_id"
+
   get "/user/subscribers", to:  "subscription#subscribers"
   get "/user/subscriptions", to: "subscription#subscriptions"
   post "/user/subscribe", to: "subscription#subscribe"
 
   post "/login", to: "login#login"
   get "/user", to: "login#user"
-end
+end 

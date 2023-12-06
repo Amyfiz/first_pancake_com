@@ -3,9 +3,13 @@ class ReceiptController < ApplicationController
     # показывает список рецептов
     def index
         @user = current_user
-        render json: {
-            receipts: @user.receipts
-        }
+        render json: @user.receipts.as_json
+    end
+
+    # возвращает рецепт по его id
+    def receipt_id
+        @receipt = Receipt.find_by(id: params[:id])
+        render json: @receipt.as_json
     end
 
     # создаёт рецепт
