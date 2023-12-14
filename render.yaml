@@ -1,0 +1,18 @@
+databases:
+  - name: first_pancake_com
+    databaseName: first_pancake_com
+    user: first_pancake_com_user
+
+services:
+  - type: web
+    name: first_pancake_com
+    runtime: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: first_pancake_com
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
