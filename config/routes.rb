@@ -22,4 +22,6 @@ Rails.application.routes.draw do
 
   post "/login", to: "login#login"
   get "/user", to: "login#user"
+  
+  get "/search/all", to: "search#index"
 end 
