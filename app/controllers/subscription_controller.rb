@@ -20,9 +20,9 @@ class SubscriptionController < ApplicationController
   # Подписывает юзера
   def subscribe
     @user = current_user
-    @subscription = Subscription.new(follower_id: @user.id, follow_id: params[:follow_id])
+    @subscription = Subscription.new(follower_id: @user, follow_id: User.find_by(id: params[:id]))
     @subscription.save
-    render json:{
+    render json: {
       subscriptions: @subscription
     }
   end

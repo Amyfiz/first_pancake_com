@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   # возвращает все подписки пользователя
   get "/user/subscriptions", to: "subscription#subscriptions"
   # подписывает пользователя
-  post "/user/subscribe", to: "subscription#subscribe"
+  post "/user/subscribe/:id", to: "subscription#subscribe"
 
   # авторизация пользователя
   post "/login", to: "login#login"
