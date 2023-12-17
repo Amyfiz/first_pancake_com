@@ -1,5 +1,5 @@
 class Receipt < ApplicationRecord
-  validates :title, :description, :photo, presence: true
+  validates :title, :description, presence: true
 
   belongs_to :user
   has_many :favourites
