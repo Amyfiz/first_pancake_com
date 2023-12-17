@@ -1,23 +1,19 @@
 class SubscriptionController < ApplicationController
-  # Возвращает подписки
+  # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
   def subscriptions
     @user = current_user
     subscriptions = User.joins(:subscriptions).where(subscriptions: { follower_id: @user.id })
-    render json: {
-      subscriptions: subscriptions
-    }
+    render json: subscriptions
   end
 
-  # Возвращает подписчиков
+  # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
   def subscribers
     @user = current_user
     subscribers = User.joins(:subscribers).where(subscriptions: { follow_id: @user.id })
-    render json: {
-      subscribers: subscribers
-    }
+    render json: subscribers
   end
 
-  # Подписывает юзера
+  # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
   def subscribe
     @user = current_user
     @subscription = Subscription.new(follower_id: @user, follow_id: User.find_by(id: params[:id]))
