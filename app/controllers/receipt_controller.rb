@@ -40,6 +40,15 @@ class ReceiptController < ApplicationController
         }
     end
 
+    def subscriptions_receipts
+        @user = current_user
+        @subscriptions = User.joins(:subscriptions).where(subscriptions: { follower_id: @user.id })
+        @receipts = Receipt.where(user_id: @subscriptions).order(created_at: :desc)
+        render json: {
+          receipt: @receipts
+        }
+    end
+
     private
     def receipt_params
         params.permit(:title, :description, :photo, :id)

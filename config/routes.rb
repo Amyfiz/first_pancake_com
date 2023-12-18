@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   # возвращает рецепт по идентификатору
   get "/receipt/:id", to: "receipt#receipt_id"
 
+  get "/receipts/subscriptions", to: "receipt#subscriptions_receipts"
+
   # возвращает всех подписчиков пользователя
   get "/user/subscribers", to:  "subscription#subscribers"
   # возвращает все подписки пользователя
