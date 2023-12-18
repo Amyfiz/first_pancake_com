@@ -25,9 +25,8 @@ class ReceiptController < ApplicationController
     # показывает список избранных рецептов пользователя
     def favourites
         @user = current_user
-        render json: {
-            favourite_receipts: @user.favourites
-        }
+        @favourite_receipts = Receipt.joins(:favourites).where(favourites: { user_id: @user.id })
+        render json: @favourite_receipts
     end
 
     # добавляет рецепт в избранное по его id
@@ -35,6 +34,26 @@ class ReceiptController < ApplicationController
         @user = current_user
         @receipt = Receipt.find_by(id: params[:id])
         @receipt.favourites.create(receipt_id: @receipt.id, user_id: @user.id)
+        render json: {
+            receipt: @receipt
+        }
+    end
+
+    # удаляет любимый рецепт авторизованного пользователя
+    def delete_favourite
+        @user = current_user
+        @favourite_receipt = @user.favourites.where(receipt_id: params[:id], user_id: @user.id)
+        @favourite_receipt.delete_all
+        render json: {
+            favourite_receipt: @favourite_receipt
+        }
+    end
+
+    # удаляет рецепт по его
+    def delete_receipt
+        @user = current_user
+        @receipt = Receipt.where(id: params[:id])
+        @receipt.delete_all
         render json: {
             receipt: @receipt
         }

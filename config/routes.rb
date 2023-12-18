@@ -18,7 +18,11 @@ Rails.application.routes.draw do
   # возвращает все избранные рецепты зарегистрированного пользователя
   get "/receipts/favourite", to: "receipt#favourites"
   # добавляет рецепт зарегистрированного пользователя в избранные
-  post "/receipts/favourite/:id", to: "receipt#add_favourite"
+  get "/receipts/favourite/:id", to: "receipt#add_favourite"
+  # удаляет из избранного
+  delete "/receipts/favourite/:id", to: "receipt#delete_favourite"
+  # удаляет рецепт по id
+  delete "/receipt/:id", to: "receipt#delete_receipt"
   # возвращает рецепт по идентификатору
   get "/receipt/:id", to: "receipt#receipt_id"
 
