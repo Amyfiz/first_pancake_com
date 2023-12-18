@@ -33,7 +33,7 @@ class ReceiptController < ApplicationController
     # добавляет рецепт в избранное по его id
     def add_favourite
         @user = current_user
-        @receipt = @user.receipts.where(id: params[:id]).first
+        @receipt = Receipt.find_by(id: params[:id])
         @receipt.favourites.create(receipt_id: @receipt.id, user_id: @user.id)
         render json: {
             receipt: @receipt
