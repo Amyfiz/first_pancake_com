@@ -1,7 +1,7 @@
 class LoginController < ApplicationController
     skip_before_action :authorized, only: [:login]
 
-    def login        
+    def login
         @user = User.find_by(email: params[:email])
         if @user
             if @user.authenticate(login_params[:password])
@@ -28,8 +28,10 @@ class LoginController < ApplicationController
           username: @user.username,
           email: @user.email,
           subscribers_count: @user.subscriptions.count,
+          subscriptions_count: @user.subscriptions.count,
           receipts_count: @user.receipts.count,
           favoutite_receipts: @user.favourites.count,
+          profile_image: @user.profile_image,
         }, status: :ok
     end
 

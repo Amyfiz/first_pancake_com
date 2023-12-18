@@ -8,18 +8,32 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root to: proc { [200, {}, ['']] }
 
+  # регистрация пользователя
   post "/registration", to: "registration#create"
 
+  # возвращает все рецепты зарегистрированного пользователя
   get "/receipts", to: "receipt#index"
+  # создаёт рецепт зарегистрированного пользователя
   post "/receipt", to: "receipt#create_receipt"
+  # возвращает все избранные рецепты зарегистрированного пользователя
   get "/receipts/favourite", to: "receipt#favourites"
+  # добавляет рецепт зарегистрированного пользователя в избранные
   post "/receipts/favourite/:id", to: "receipt#add_favourite"
+  # возвращает рецепт по идентификатору
   get "/receipt/:id", to: "receipt#receipt_id"
 
+  # возвращает всех подписчиков пользователя
   get "/user/subscribers", to:  "subscription#subscribers"
+  # возвращает все подписки пользователя
   get "/user/subscriptions", to: "subscription#subscriptions"
-  post "/user/subscribe", to: "subscription#subscribe"
+  # подписывает пользователя
+  post "/user/subscribe/:id", to: "subscription#subscribe"
 
+  # авторизация пользователя
   post "/login", to: "login#login"
+  # возвращает данные пользователя
   get "/user", to: "login#user"
+
+  # возвращает все рецепты
+  get "/search/all", to: "search#index"
 end 

@@ -42,6 +42,6 @@ class ReceiptController < ApplicationController
 
     private
     def receipt_params
-        params.permit(:title, :description, :photo)
+        params.permit(:title, :description, :photo, :id)
     end
 end
