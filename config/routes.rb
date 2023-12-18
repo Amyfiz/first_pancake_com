@@ -24,6 +24,8 @@ Rails.application.routes.draw do
 
   get "/receipts/subscriptions", to: "receipt#subscriptions_receipts"
 
+  get "/receipts/:id", to: "receipt#receipts_by_user_id"
+
   # возвращает всех подписчиков пользователя
   get "/user/subscribers", to:  "subscription#subscribers"
   # возвращает все подписки пользователя
