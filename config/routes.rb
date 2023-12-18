@@ -38,6 +38,8 @@ Rails.application.routes.draw do
   # возвращает данные пользователя
   get "/user", to: "login#user"
 
+  get "/user/:id", to: "login#get_user_by_id"
+
   # возвращает все рецепты
   get "/search/all", to: "search#index"
 end 
