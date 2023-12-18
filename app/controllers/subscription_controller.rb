@@ -22,4 +22,15 @@ class SubscriptionController < ApplicationController
       subscriptions: @subscription
     }
   end
+
+  def unsubscribe
+    @user = current_user
+    @follow = User.find(params[:id])
+    @subscription = Subscription.where(follower_id: @user.id, follow_id: @follow.id)
+    @subscription.delete_all
+    render json: {
+      subscriptions: @follow
+    }
+  end
+
 end
