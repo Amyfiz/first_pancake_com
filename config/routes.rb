@@ -21,6 +21,10 @@ Rails.application.routes.draw do
   post "/receipts/favourite/:id", to: "receipt#add_favourite"
   # возвращает рецепт по идентификатору
   get "/receipt/:id", to: "receipt#receipt_id"
+  # вовзращает рецепт авторизованного пользователя
+  get "/receipts/:id", to: "receipt#receipts_by_user_id"
+  # возвращает все рецепты пользователей, на которых он подписан
+  get "/receipts/subscriptions", to: "receipt#subscriptions_receipts"
 
   # возвращает всех подписчиков пользователя
   get "/user/subscribers", to:  "subscription#subscribers"
@@ -28,6 +32,7 @@ Rails.application.routes.draw do
   get "/user/subscriptions", to: "subscription#subscriptions"
   # подписывает пользователя
   post "/user/subscribe/:id", to: "subscription#subscribe"
+  get "/user/:id", to: "login#get_user_by_id"
 
   # авторизация пользователя
   post "/login", to: "login#login"
