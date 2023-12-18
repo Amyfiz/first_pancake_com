@@ -9,7 +9,17 @@ class ReceiptController < ApplicationController
     # возвращает рецепт по его id
     def receipt_id
         @receipt = Receipt.find_by(id: params[:id])
-        render json: @receipt.as_json
+
+        render json: {
+            id: @receipt.id,
+            title: @receipt.title,
+            description: @receipt.description,
+            user_id: @receipt.user_id,
+            receipt_author: @receipt.user.username,
+            created_at: @receipt.created_at,
+            category_id: @receipt.category_id,
+            photo: @receipt.photo 
+        }, status: :ok
     end
 
     # создаёт рецепт
