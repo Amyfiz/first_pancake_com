@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   # подписывает пользователя
   post "/user/subscribe/:id", to: "subscription#subscribe"
 
-  post "/user/unsubscribe/:id", to: "subscription#unsubscribe"
+  delete "/user/unsubscribe/:id", to: "subscription#unsubscribe"
 
   # авторизация пользователя
   post "/login", to: "login#login"
