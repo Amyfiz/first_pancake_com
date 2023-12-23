@@ -44,6 +44,8 @@ Rails.application.routes.draw do
 
   post "/user/photo", to: "login#add_photo"
 
+  delete "/user/photo", to: "login#delete_photo"
+
   delete "/user/unsubscribe/:id", to: "subscription#unsubscribe"
 
   # авторизация пользователя

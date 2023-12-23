@@ -56,6 +56,13 @@ class LoginController < ApplicationController
         render json: @user
     end
 
+    def delete_photo
+        @user = current_user
+        @user.profile_image = nil
+        @user.save
+        render json: @user
+    end
+
     private 
     def login_params 
         params.permit(:email,:password)
