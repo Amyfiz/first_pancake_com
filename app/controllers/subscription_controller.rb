@@ -18,6 +18,7 @@ class SubscriptionController < ApplicationController
     @user = current_user
     @subscription = Subscription.new(follower_id: @user, follow_id: User.find_by(id: params[:id]))
     @subscription.save
+    @id = params[:id]
     render json: {
       subscriptions: @subscription
     }
@@ -31,6 +32,11 @@ class SubscriptionController < ApplicationController
     render json: {
       subscriptions: @follow
     }
+  end
+
+  def is_user_subscribed
+    @user = current_user
+    render json: Subscription.where(follower_id: @user.id, follow_id: params[:id]).exists?
   end
 
 end

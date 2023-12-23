@@ -6,22 +6,6 @@ class ReceiptController < ApplicationController
         render json: @user.receipts.as_json
     end
 
-    # возвращает рецепт по его id
-    def receipt_id
-        @receipt = Receipt.find_by(id: params[:id])
-
-        render json: {
-            id: @receipt.id,
-            title: @receipt.title,
-            description: @receipt.description,
-            user_id: @receipt.user_id,
-            receipt_author: @receipt.user.username,
-            created_at: @receipt.created_at,
-            category_id: @receipt.category_id,
-            photo: @receipt.photo 
-        }, status: :ok
-    end
-
     # создаёт рецепт
     def create_receipt
         @receipt = Receipt.new receipt_params
@@ -68,19 +52,34 @@ class ReceiptController < ApplicationController
             receipt: @receipt
         }
     end
+    
 
     def subscriptions_receipts
         @user = current_user
         @subscriptions = User.joins(:subscriptions).where(subscriptions: { follower_id: @user.id })
         @receipts = Receipt.where(user_id: @subscriptions).order(created_at: :desc)
+        render json: @receipts
+    end
+
+    # возвращает рецепт по его id
+    def receipt_id
+        @receipt = Receipt.find_by(id: params[:id])
+
         render json: {
-          receipt: @receipts
-        }
+            id: @receipt.id,
+            title: @receipt.title,
+            description: @receipt.description,
+            user_id: @receipt.user_id,
+            receipt_author: @receipt.user.username,
+            created_at: @receipt.created_at,
+            category_id: @receipt.category_id,
+            photo: @receipt.photo 
+        }, status: :ok
     end
 
     def receipts_by_user_id
         @user = User.find(params[:id])
-        @receipts = Receipt.where(user_id: @user).order(created_at: :desc)
+        @receipts = @user.receipts
         render json: @receipts   
     end
 

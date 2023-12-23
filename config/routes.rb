@@ -25,14 +25,11 @@ Rails.application.routes.draw do
   delete "/receipt/:id", to: "receipt#delete_receipt"
   # возвращает рецепт по идентификатору
   get "/receipt/:id", to: "receipt#receipt_id"
-  # вовзращает рецепт авторизованного пользователя
-  get "/receipts/:id", to: "receipt#receipts_by_user_id"
   # возвращает все рецепты пользователей, на которых он подписан
   get "/receipts/subscriptions", to: "receipt#subscriptions_receipts"
-
-  get "/receipts/subscriptions", to: "receipt#subscriptions_receipts"
-
+  # вовзращает рецепт авторизованного пользователя
   get "/receipts/:id", to: "receipt#receipts_by_user_id"
+
 
   # возвращает всех подписчиков пользователя
   get "/user/subscribers", to:  "subscription#subscribers"
@@ -41,7 +38,9 @@ Rails.application.routes.draw do
   # подписывает пользователя
   post "/user/subscribe/:id", to: "subscription#subscribe"
   get "/user/:id", to: "login#get_user_by_id"
-
+  # подписан ли пользователь на кого-то
+  get "user/subscribed/:id", to: "subscription#is_user_subscribed"
+  # отписывает пользователя от человека по его id
   delete "/user/unsubscribe/:id", to: "subscription#unsubscribe"
 
   # авторизация пользователя
