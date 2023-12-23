@@ -51,16 +51,14 @@ class LoginController < ApplicationController
 
     def add_photo
         @user = current_user
-        @user.profile_image = params[:photo]
-        @user.save
-        render json: @user
+        @user.update(profile_image: params[:photo])
+        render json: { message: "Photo added sucessfully."}
     end
 
     def delete_photo
         @user = current_user
-        @user.profile_image = nil
-        @user.save
-        render json: @user
+        @user.update(profile_image: nil)
+        render json: { message: "Photo deleted successfully."}
     end
 
     private 
