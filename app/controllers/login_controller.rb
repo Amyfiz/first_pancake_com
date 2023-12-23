@@ -49,6 +49,13 @@ class LoginController < ApplicationController
         }, status: :ok
     end
 
+    def add_photo
+        @user = current_user
+        @user.profile_image = params[:photo]
+        @user.save
+        render json: @user
+    end
+
     private 
     def login_params 
         params.permit(:email,:password)
