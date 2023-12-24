@@ -24,7 +24,7 @@ class LoginController < ApplicationController
         #@receipt = Receipt.find_by(     id: 1)
         #@receipt.favourites.create(user_id: @user.id)
         render json: {
-          user_id: @user.id,
+          id: @user.id,
           username: @user.username,
           email: @user.email,
           subscribers_count: @user.subscriptions.count,
@@ -38,7 +38,7 @@ class LoginController < ApplicationController
     def get_user_by_id
         @user = User.find(params[:id])
         render json: {
-          user_id: @user.id,
+          id: @user.id,
           username: @user.username,
           email: @user.email,
           subscribers_count: @user.subscriptions.count,
