@@ -52,6 +52,8 @@ Rails.application.routes.draw do
   post "/login", to: "login#login"
   # возвращает данные пользователя
   get "/user", to: "login#user"
+  # возврашает данные пользователя по его id
+  get "/user/info/:id", to: "login#user_info_by_id"
 
   get "/user/:id", to: "login#get_user_by_id"
 

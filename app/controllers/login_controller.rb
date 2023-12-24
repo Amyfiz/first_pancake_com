@@ -27,13 +27,23 @@ class LoginController < ApplicationController
           id: @user.id,
           username: @user.username,
           email: @user.email,
-          subscribers_count: @user.subscriptions.count,
-          subscriptions_count: @user.subscriptions.count,
+          subscribers_count: Subscription.where(follow_id: @user.id).count,
+          subscriptions_count: Subscription.where(follower_id: @user.id).count,
           receipts_count: @user.receipts.count,
           favourite_receipts: @user.favourites.count,
           profile_image: @user.profile_image,
         }, status: :ok
     end
+
+    def user_info_by_id
+        @user = User.find_by(id: params[:id])
+        render json: {
+          subscribers_count: Subscription.where(follow_id: @user.id).count,
+          subscriptions_count:  Subscription.where(follower_id: @user.id).count,
+          receipts_count: @user.receipts.count,
+        }, status: :ok
+    end
+
 
     def get_user_by_id
         @user = User.find(params[:id])
