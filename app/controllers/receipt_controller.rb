@@ -58,7 +58,17 @@ class ReceiptController < ApplicationController
         @user = current_user
         @subscriptions = User.joins(:subscriptions).where(subscriptions: { follower_id: @user.id })
         @receipts = Receipt.where(user_id: @subscriptions).order(created_at: :desc)
-        render json: @receipts
+        @receipts_result = @receipts.map do |receipt| {
+            title: receipt.title,
+            id: receipt.id,
+            description: receipt.description,
+            user_id: receipt.user_id,
+            created_at: receipt.created_at,
+            photo: receipt.photo,
+            receipt_author: receipt.user.username
+        }
+        end 
+        render json: @receipts_result
     end
 
     # возвращает рецепт по его id
