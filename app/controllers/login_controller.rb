@@ -40,7 +40,7 @@ class LoginController < ApplicationController
         render json: {
           subscribers_count: Subscription.where(follow_id: @user.id).count,
           subscriptions_count:  Subscription.where(follower_id: @user.id).count,
-          receipts_count: @user.receipts.count,
+          receipts_count: @user.favourites.count,
         }, status: :ok
     end
 
